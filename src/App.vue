@@ -62,3 +62,21 @@ const toggleDark = useToggle(isDark)
   flex-grow: 1;
 }
 </style>
+
+<style>
+.el-card {
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: none
+}
+
+.el-input__wrapper, .el-select__wrapper {
+  padding: 4px 12px;
+  box-sizing: content-box;
+}
+
+.el-input__wrapper, .el-select__wrapper, .el-popper, .el-popover.el-popper  {
+  border-radius: 10px;
+}
+</style>
