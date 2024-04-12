@@ -9,6 +9,7 @@
     /* Bundler mode */
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
+    "types": ["element-plus/global"],
     "allowImportingTsExtensions": true,
 
     /* Linting */
