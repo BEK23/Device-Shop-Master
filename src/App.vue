@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useDark, useToggle } from '@vueuse/core'
+import DevicesTable from './pages/devices/DevicesTable.vue'
 
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
@@ -20,7 +21,7 @@ const toggleDark = useToggle(isDark)
       </div>
     </el-header>
     <el-main>
-      <!-- Content goes here -->
+      <DevicesTable />
     </el-main>
   </el-container>
 </template>

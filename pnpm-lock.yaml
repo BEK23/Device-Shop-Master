@@ -14,6 +14,9 @@ dependencies:
   element-plus:
     specifier: ^2.6.3
     version: 2.6.3(vue@3.4.21)
+  lucide-vue-next:
+    specifier: ^0.368.0
+    version: 0.368.0(vue@3.4.21)
   vue:
     specifier: ^3.4.21
     version: 3.4.21(typescript@5.4.5)
@@ -2456,6 +2459,14 @@ packages:
     dependencies:
       yallist: 4.0.0
     dev: true
+
+  /lucide-vue-next@0.368.0(vue@3.4.21):
+    resolution: {integrity: sha512-ZP5p4ndnPsI858xLFN5Jsz2OrG4e2XPV5T5R7MHOUL4HHg1nHOMWncJBclbX3/1wQP+1AiwqcNARbr0ZoNuGNg==}
+    peerDependencies:
+      vue: '>=3.0.1'
+    dependencies:
+      vue: 3.4.21(typescript@5.4.5)
+    dev: false
 
   /magic-string@0.30.9:
     resolution: {integrity: sha512-S1+hd+dIrC8EZqKyT9DstTH/0Z+f76kmmvZnkfQVmOpDEF9iVgdYif3Q/pIWHmCoo59bQVGW0kVL3e2nl+9+Sw==}
