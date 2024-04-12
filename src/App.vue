@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useDark, useToggle } from '@vueuse/core'
+import { MoonIcon, SunIcon } from 'lucide-vue-next'
 import DevicesTable from './pages/devices/DevicesTable.vue'
 
 const isDark = useDark()
@@ -14,10 +15,10 @@ const toggleDark = useToggle(isDark)
         <!-- <img src="./logo.png" alt="Logo"> -->
       </div>
       <div class="right-section">
-        <el-icon class="theme-toggle" @click="toggleDark()">
-          <Moon v-if="isDark" />
-          <Sunny v-else />
-        </el-icon>
+        <div class="theme-toggle" @click="toggleDark()">
+          <MoonIcon v-if="isDark" :size="20" />
+          <SunIcon v-else :size="20" />
+        </div>
       </div>
     </el-header>
     <el-main>
@@ -26,7 +27,7 @@ const toggleDark = useToggle(isDark)
   </el-container>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .el-container {
   height: 100vh;
   display: flex;
@@ -38,11 +39,17 @@ const toggleDark = useToggle(isDark)
   justify-content: space-between;
   align-items: center;
   padding: 20px 60px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
 }
 
-.logo img {
-  width: 100px;
-  height: auto;
+.logo {
+  font-size: 24px;
+  color: #409eff;
+
+  img {
+    width: 100px;
+    height: auto;
+  }
 }
 
 .right-section {
@@ -56,6 +63,7 @@ const toggleDark = useToggle(isDark)
 
 .theme-toggle {
   cursor: pointer;
+  margin-top: 4px;
 }
 
 .el-main {

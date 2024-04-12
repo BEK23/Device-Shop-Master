@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { ref } from 'vue'
 import { Edit3Icon, EllipsisVerticalIcon, Trash2Icon } from 'lucide-vue-next'
 import DevicesToolbar from './components/DevicesToolbar.vue'
 import type { IProductResponse } from '~/types/product.interface'
@@ -170,6 +171,16 @@ const data: IProductResponse[] = [
     createdAt: '2022-01-15',
   },
 ]
+
+const pageSize = ref(10)
+const currentPage = ref(1)
+
+function handleSizeChange(val: number) {
+  pageSize.value = val
+}
+function handleCurrentChange(val: number) {
+  currentPage.value = val
+}
 </script>
 
 <template>
@@ -218,6 +229,16 @@ const data: IProductResponse[] = [
       </el-table-column>
     </el-table>
   </el-card>
+  <el-pagination
+    :current-page="currentPage"
+    :page-sizes="[10, 20, 30, 40]"
+    :page-size="pageSize"
+    layout="total, sizes, ->, prev, pager, next, jumper"
+    :total="data.length"
+    :small="true"
+    @size-change="handleSizeChange"
+    @current-change="handleCurrentChange"
+  />
 </template>
 
 <style scoped>
