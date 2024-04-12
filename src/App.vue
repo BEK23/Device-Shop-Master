@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useDark, useToggle } from '@vueuse/core'
+
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
 </script>
 
 <template>
@@ -9,9 +13,9 @@
         <!-- <img src="./logo.png" alt="Logo"> -->
       </div>
       <div class="right-section">
-        <el-icon>
-          <Sunny v-if="theme === 'light'" />
-          <Moon v-else />
+        <el-icon class="theme-toggle" @click="toggleDark()">
+          <Moon v-if="isDark" />
+          <Sunny v-else />
         </el-icon>
       </div>
     </el-header>
@@ -33,7 +37,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 60px;
-  background-color: #f0f0f0;
 }
 
 .logo img {
@@ -48,6 +51,10 @@
 
 .right-section > * {
   margin-left: 10px;
+}
+
+.theme-toggle {
+  cursor: pointer;
 }
 
 .el-main {
