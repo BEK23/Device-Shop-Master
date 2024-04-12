@@ -67,6 +67,7 @@ const toggleDark = useToggle(isDark)
 }
 
 .el-main {
+  padding: 20px 30px;
   flex-grow: 1;
 }
 </style>

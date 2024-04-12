@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { Edit3Icon, EllipsisVerticalIcon, Trash2Icon } from 'lucide-vue-next'
+import { Plus } from '@element-plus/icons-vue'
 import DevicesToolbar from './components/DevicesToolbar.vue'
+import Bredcrumbs from '~/components/Breadcrumbs.vue'
 import type { IProductResponse } from '~/types/product.interface'
 
 const data: IProductResponse[] = [
@@ -184,6 +186,13 @@ function handleCurrentChange(val: number) {
 </script>
 
 <template>
+  <el-row justify="space-between" align="bottom">
+    <Bredcrumbs :breadcrumbs="[{ title: 'Devices' }]" />
+    <el-button type="primary" :icon="Plus" style="border-radius: 10px; margin-bottom: 20px;">
+      Add Device
+    </el-button>
+  </el-row>
+
   <DevicesToolbar />
 
   <el-card shadow="never">
