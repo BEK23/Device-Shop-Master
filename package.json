@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "@types/node": "^20.12.7",
     "@vueuse/core": "^10.9.0",
     "element-plus": "^2.6.3",
     "lucide-vue-next": "^0.368.0",

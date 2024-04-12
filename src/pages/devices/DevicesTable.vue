@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { Edit3Icon, EllipsisVerticalIcon, Trash2Icon } from 'lucide-vue-next'
-import type { IProductResponse } from '../../types/product.interface'
 import DevicesToolbar from './components/DevicesToolbar.vue'
+import type { IProductResponse } from '~/types/product.interface'
 
 const data: IProductResponse[] = [
   {
