@@ -16,7 +16,8 @@
     "@vueuse/core": "^10.9.0",
     "element-plus": "^2.6.3",
     "lucide-vue-next": "^0.368.0",
-    "vue": "^3.4.21"
+    "vue": "^3.4.21",
+    "vue-router": "4"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.13.3",

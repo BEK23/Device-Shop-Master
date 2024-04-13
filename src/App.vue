@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useDark, useToggle } from '@vueuse/core'
 import { MoonIcon, SunIcon } from 'lucide-vue-next'
-import DevicesTable from './pages/devices/DevicesTable.vue'
+import { RouterView } from 'vue-router'
 
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
@@ -22,7 +22,7 @@ const toggleDark = useToggle(isDark)
       </div>
     </el-header>
     <el-main>
-      <DevicesTable />
+      <RouterView />
     </el-main>
   </el-container>
 </template>
@@ -74,7 +74,6 @@ const toggleDark = useToggle(isDark)
 
 <style>
 .el-card {
-  width: 100%;
   margin-bottom: 20px;
   border-radius: 10px;
   border: none
