@@ -1,23 +1,37 @@
-<script lang="ts" setup>
+<script setup>
 import { computed, ref } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
 
 import { useRoute } from 'vue-router'
+import { useQuery } from '@tanstack/vue-query'
 import { data } from './data'
 import DevicesTable from './DevicesTable.vue'
 import DevicesToolbar from './components/DevicesToolbar.vue'
-
-import Breadcrumbs from '~/components/Breadcrumbs.vue'
 import { PATH } from '~/constants/path'
+import Breadcrumbs from '~/components/Breadcrumbs.vue'
+import { getDevicesList } from '~/api/devices'
+import { useDevicesStore } from '~/store/devices.store'
 
 const router = useRoute()
+
 const pageSize = ref(10)
 const currentPage = ref(1)
 
-function handleSizeChange(val: number) {
+const store = useDevicesStore()
+
+useQuery({
+  queryKey: ['devices', { page: currentPage.value, limit: pageSize.value }],
+  queryFn: getDevicesList,
+  select: (response) => {
+    store.setDevices(response.data)
+  },
+  refetchOnWindowFocus: false,
+})
+
+function handleSizeChange(val) {
   pageSize.value = val
 }
-function handleCurrentChange(val: number) {
+function handleCurrentChange(val) {
   currentPage.value = val
 }
 
@@ -48,7 +62,7 @@ const drawer = computed(() => router.name !== 'devices.index')
       :page-sizes="[10, 20, 30, 40]"
       :page-size="pageSize"
       layout="total, sizes, ->, prev, pager, next, jumper"
-      :total="data.length"
+      :total="store.total"
       :small="true"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"

@@ -6,6 +6,7 @@ import type { IDevicesListQueryParams, IDevicesListResponse } from '~/types/prod
 export const getDevicesList: QueryFunction<
   AxiosResponse<IDevicesListResponse>,
   [string, IDevicesListQueryParams]
-> = () => {
-  return API.get('/devices')
+> = ({ queryKey }) => {
+  const [, params] = queryKey
+  return API.get('/devices', { params })
 }

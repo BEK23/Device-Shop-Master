@@ -1,19 +1,12 @@
 <script setup>
-import { useQuery } from '@tanstack/vue-query'
-import { API } from '~/api/api'
-import { getDevicesList } from '~/api/devices'
+import { useDevicesStore } from '~/store/devices.store'
 
-const { data } = useQuery({
-  queryKey: ['devices'],
-  queryFn: getDevicesList,
-  select: response => response.data.data,
-  refetchOnWindowFocus: false,
-})
+const store = useDevicesStore()
 </script>
 
 <template>
   <el-card shadow="never">
-    <el-table :data="data" fit>
+    <el-table :data="store.devices" fit>
       <el-table-column prop="visible" label="Visible" width="80" align="center">
         <template #default="{ row }">
           <el-checkbox v-model="row.visible" />
