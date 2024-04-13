@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useDark, useToggle } from '@vueuse/core'
 import { MoonIcon, SunIcon } from 'lucide-vue-next'
-import { RouterView } from 'vue-router'
 
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
@@ -22,7 +21,7 @@ const toggleDark = useToggle(isDark)
       </div>
     </el-header>
     <el-main>
-      <RouterView />
+      <router-view />
     </el-main>
   </el-container>
 </template>
@@ -67,7 +66,7 @@ const toggleDark = useToggle(isDark)
 }
 
 .el-main {
-  padding: 20px 30px;
+  padding: 20px 0;
   flex-grow: 1;
 }
 </style>
@@ -84,7 +83,7 @@ const toggleDark = useToggle(isDark)
   box-sizing: content-box;
 }
 
-.el-input__wrapper, .el-select__wrapper, .el-popper, .el-popover.el-popper  {
+.el-input__wrapper, .el-select__wrapper, .el-popper, .el-popover.el-popper, .el-button  {
   border-radius: 10px;
 }
 </style>
