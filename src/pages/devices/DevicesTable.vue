@@ -1,5 +1,14 @@
 <script setup>
-import { data } from './data'
+import { useQuery } from '@tanstack/vue-query'
+import { API } from '~/api/api'
+import { getDevicesList } from '~/api/devices'
+
+const { data } = useQuery({
+  queryKey: ['devices'],
+  queryFn: getDevicesList,
+  select: response => response.data.data,
+  refetchOnWindowFocus: false,
+})
 </script>
 
 <template>
@@ -47,7 +56,6 @@ import { data } from './data'
     </el-table>
   </el-card>
 </template>
-
 
 <style scoped>
 .el-table {

@@ -1,4 +1,6 @@
-export interface IProduct {
+import type { IMeta, ITableQueryParams } from './common'
+
+export interface IDevice {
   model: string
   releaseDate: string
   category: string
@@ -8,7 +10,21 @@ export interface IProduct {
   photo: string
 }
 
-export interface IProductResponse extends IProduct {
+// RESPONSE
+
+export interface IDeviceResponse extends IDevice {
   id: string
   createdAt: string
+}
+
+export interface IDevicesListResponse {
+  data: IDeviceResponse[]
+  meta: IMeta
+}
+
+// QUERY PARAMS
+
+export interface IDevicesListQueryParams extends ITableQueryParams {
+  search?: string
+  category?: string
 }

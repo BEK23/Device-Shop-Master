@@ -1,6 +1,6 @@
-import type { IProductResponse } from '~/types/product.interface'
+import type { IDeviceResponse } from '~/types/product.interface'
 
-export const data: IProductResponse[] = [
+export const data: IDeviceResponse[] = [
   {
     model: 'Model 1',
     releaseDate: '2022-01-01',
