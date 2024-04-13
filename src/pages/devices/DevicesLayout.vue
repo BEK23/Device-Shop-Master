@@ -1,16 +1,16 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
 
+import { useRoute } from 'vue-router'
 import { data } from './data'
 import DevicesTable from './DevicesTable.vue'
 import DevicesToolbar from './components/DevicesToolbar.vue'
-import DeviceCreate from './form/create/DeviceCreate.vue'
 
 import Breadcrumbs from '~/components/Breadcrumbs.vue'
+import { PATH } from '~/constants/path'
 
-const drawer = ref(false)
-
+const router = useRoute()
 const pageSize = ref(10)
 const currentPage = ref(1)
 
@@ -20,20 +20,23 @@ function handleSizeChange(val: number) {
 function handleCurrentChange(val: number) {
   currentPage.value = val
 }
+
+const drawer = computed(() => router.name !== 'devices.index')
 </script>
 
 <template>
   <el-scrollbar style="height: 100%">
     <el-row justify="space-between" align="bottom">
       <Breadcrumbs :breadcrumbs="[{ title: 'Devices' }]" />
-      <el-button
-        type="primary"
-        :icon="Plus"
-        style="margin-bottom: 20px;"
-        @click="drawer = true"
-      >
-        Add Device
-      </el-button>
+      <router-link :to="PATH.devices.create">
+        <el-button
+          type="primary"
+          :icon="Plus"
+          style="margin-bottom: 20px;"
+        >
+          Add Device
+        </el-button>
+      </router-link>
     </el-row>
 
     <DevicesToolbar />
@@ -52,8 +55,8 @@ function handleCurrentChange(val: number) {
     />
   </el-scrollbar>
 
-  <el-drawer v-model="drawer" :with-header="false" size="40%">
-    <DeviceCreate />
+  <el-drawer v-model="drawer" :with-header="false" size="40%" @close="$router.replace(PATH.devices.index)">
+    <router-view />
   </el-drawer>
 </template>
 
