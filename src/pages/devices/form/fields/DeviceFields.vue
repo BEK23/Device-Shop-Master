@@ -1,4 +1,6 @@
 <script setup>
+import { useCategoryStore } from '~/store/category.store'
+
 const { defineField } = defineProps({
   defineField: Function,
 })
@@ -20,6 +22,14 @@ const [recommendedPrice, recommendedPriceProps] = defineField('recommendedPrice'
 const [description, descriptionProps] = defineField('description', elPlusConfig)
 const [visible, visibleProps] = defineField('visible', elPlusConfig)
 const [photoProps] = defineField('photo', elPlusConfig)
+
+const categoryStore = useCategoryStore()
+
+function disabledDate(time) {
+  const date = new Date()
+
+  return time.getTime() > date.getTime()
+}
 </script>
 
 <template>
@@ -30,12 +40,20 @@ const [photoProps] = defineField('photo', elPlusConfig)
   <el-row gutter="12">
     <el-col :span="12">
       <el-form-item label="Category" v-bind="categoryProps">
-        <el-select v-model="category" type="text" />
+        <el-select v-model="category">
+          <el-option
+            v-for="item in categoryStore.categories"
+            :key="item.id"
+            :label="item.label"
+            :value="item.id"
+          />
+        </el-select>
       </el-form-item>
     </el-col>
+
     <el-col :span="12">
       <el-form-item label="Release Date" v-bind="releaseDateProps">
-        <el-date-picker v-model="releaseDate" type="date" style="width: 100%;" />
+        <el-date-picker v-model="releaseDate" type="year" style="width: 100%;" :disabled-date="disabledDate" />
       </el-form-item>
     </el-col>
   </el-row>

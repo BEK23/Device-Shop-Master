@@ -151,8 +151,7 @@
       "createdAt": 1688352000
     }
   ],
-  "categories":
-  [
+  "categories": [
     {
       "id": 1,
       "label": "Computing Devices"

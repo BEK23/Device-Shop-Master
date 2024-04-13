@@ -2,12 +2,12 @@ import type { IMeta, ITableQueryParams } from './common'
 
 export interface IDevice {
   model: string
-  releaseDate: string
-  category: string
+  releaseDate: number
+  category: number
   recommendedPrice: number
-  description: string
-  visible: boolean
-  photo: string
+  description?: string
+  visible?: boolean
+  photo?: string
 }
 
 // RESPONSE

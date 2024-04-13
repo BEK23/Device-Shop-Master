@@ -11,9 +11,15 @@ export const useDevicesStore = defineStore('devices', () => {
     total.value = response.meta.total
   }
 
+  function addDevice(device: IDeviceResponse) {
+    devices.value.unshift(device)
+    total.value++
+  }
+
   return {
     devices,
     total,
     setDevices,
+    addDevice,
   }
 })

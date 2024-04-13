@@ -1,5 +1,6 @@
 const path = require('node:path')
 const jsonServer = require('json-server')
+const bodyParser = require('body-parser')
 // const chokidar = require('chokidar')
 
 const server = jsonServer.create()
@@ -18,12 +19,7 @@ const router = jsonServer.router(path.join(__dirname, 'db.json'))
 const middlewares = jsonServer.defaults()
 
 server.use(middlewares)
-server.use((req, res, next) => {
-  console.log('GET request received at:', new Date().toLocaleTimeString())
-
-  // Continue to JSON Server router
-  next()
-})
+server.use(bodyParser.json())
 
 server.get('/devices', (req, res) => {
   const devices = router.db.get('devices').value()
@@ -46,6 +42,14 @@ server.get('/devices', (req, res) => {
   }
 
   res.json(response)
+})
+
+server.post('/devices', (req, res) => {
+  const devices = router.db.get('devices').value()
+  const newDevice = { ...req.body, id: devices.length + 1, createdAt: new Date().getTime() }
+  devices.unshift(newDevice)
+  router.db.set('devices', devices).write()
+  res.status(201).json(newDevice)
 })
 
 server.use(router)
