@@ -1,167 +1,197 @@
 {
-  "devices": [{
-    "model": "Model 1",
-    "releaseDate": "2022-01-01",
-    "category": "Category 1",
-    "recommendedPrice": 100,
-    "description": "Description 1",
-    "visible": true,
-    "photo": "photo1.jpg",
-    "id": "1",
-    "createdAt": "2022-01-01"
-  },
-  {
-    "model": "Model 2",
-    "releaseDate": "2022-01-02",
-    "category": "Category 2",
-    "recommendedPrice": 200,
-    "description": "Description 2",
-    "visible": true,
-    "photo": "photo2.jpg",
-    "id": "2",
-    "createdAt": "2022-01-02"
-  },
-  {
-    "model": "Model 3",
-    "releaseDate": "2022-01-03",
-    "category": "Category 3",
-    "recommendedPrice": 300,
-    "description": "Description 3",
-    "visible": true,
-    "photo": "photo3.jpg",
-    "id": "3",
-    "createdAt": "2022-01-03"
-  },
-  {
-    "model": "Model 4",
-    "releaseDate": "2022-01-04",
-    "category": "Category 4",
-    "recommendedPrice": 400,
-    "description": "Description 4",
-    "visible": false,
-    "photo": "photo4.jpg",
-    "id": "4",
-    "createdAt": "2022-01-04"
-  },
-  {
-    "model": "Model 5",
-    "releaseDate": "2022-01-05",
-    "category": "Category 5",
-    "recommendedPrice": 500,
-    "description": "Description 5",
-    "visible": true,
-    "photo": "photo5.jpg",
-    "id": "5",
-    "createdAt": "2022-01-05"
-  },
-  {
-    "model": "Model 6",
-    "releaseDate": "2022-01-06",
-    "category": "Category 6",
-    "recommendedPrice": 600,
-    "description": "Description 6",
-    "visible": true,
-    "photo": "photo6.jpg",
-    "id": "6",
-    "createdAt": "2022-01-06"
-  },
-  {
-    "model": "Model 7",
-    "releaseDate": "2022-01-07",
-    "category": "Category 7",
-    "recommendedPrice": 700,
-    "description": "Description 7",
-    "visible": true,
-    "photo": "photo7.jpg",
-    "id": "7",
-    "createdAt": "2022-01-07"
-  },
-  {
-    "model": "Model 8",
-    "releaseDate": "2022-01-08",
-    "category": "Category 8",
-    "recommendedPrice": 800,
-    "description": "Description 8",
-    "visible": true,
-    "photo": "photo8.jpg",
-    "id": "8",
-    "createdAt": "2022-01-08"
-  },
-  {
-    "model": "Model 9",
-    "releaseDate": "2022-01-09",
-    "category": "Category 9",
-    "recommendedPrice": 900,
-    "description": "Description 9",
-    "visible": true,
-    "photo": "photo9.jpg",
-    "id": "9",
-    "createdAt": "2022-01-09"
-  },
-  {
-    "model": "Model 10",
-    "releaseDate": "2022-01-10",
-    "category": "Category 10",
-    "recommendedPrice": 1000,
-    "description": "Description 10",
-    "visible": true,
-    "photo": "photo10.jpg",
-    "id": "10",
-    "createdAt": "2022-01-10"
-  },
-  {
-    "model": "Model 11",
-    "releaseDate": "2022-01-11",
-    "category": "Category 11",
-    "recommendedPrice": 1100,
-    "description": "Description 11",
-    "visible": true,
-    "photo": "photo11.jpg",
-    "id": "11",
-    "createdAt": "2022-01-11"
-  },
-  {
-    "model": "Model 12",
-    "releaseDate": "2022-01-12",
-    "category": "Category 12",
-    "recommendedPrice": 1200,
-    "description": "Description 12",
-    "visible": true,
-    "photo": "photo12.jpg",
-    "id": "12",
-    "createdAt": "2022-01-12"
-  },
-  {
-    "model": "Model 13",
-    "releaseDate": "2022-01-13",
-    "category": "Category 13",
-    "recommendedPrice": 1300,
-    "description": "Description 13",
-    "visible": true,
-    "photo": "photo13.jpg",
-    "id": "13",
-    "createdAt": "2022-01-13"
-  },
-  {
-    "model": "Model 14",
-    "releaseDate": "2022-01-14",
-    "category": "Category 14",
-    "recommendedPrice": 1400,
-    "description": "Description 14",
-    "visible": true,
-    "photo": "photo14.jpg",
-    "id": "14",
-    "createdAt": "2022-01-14"
-  },
-  {
-    "model": "Model 15",
-    "releaseDate": "2022-01-15",
-    "category": "Category 15",
-    "recommendedPrice": 1500,
-    "description": "Description 15",
-    "visible": true,
-    "photo": "photo15.jpg",
-    "id": "15",
-    "createdAt": "2022-01-15"
-  }]
+  "devices": [
+    {
+      "id": 1,
+      "model": "Pixel 7 Pro",
+      "releaseDate": "2023",
+      "category": 1,
+      "recommendedPrice": 899,
+      "description": "A powerful phone with a great camera system.",
+      "visible": true,
+      "createdAt": 1604563200
+    },
+    {
+      "id": 2,
+      "model": "Galaxy Z Fold4",
+      "releaseDate": "2023",
+      "category": 1,
+      "recommendedPrice": 1799,
+      "description": "A foldable phone with a large display.",
+      "visible": true,
+      "createdAt": 1609459200
+    },
+    {
+      "id": 3,
+      "model": "MacBook Air M2",
+      "releaseDate": "2022",
+      "category": 1,
+      "recommendedPrice": 1299,
+      "description": "A thin and light laptop with a powerful M2 chip.",
+      "visible": true,
+      "createdAt": 1640995200
+    },
+    {
+      "id": 4,
+      "model": "Sony WH-1000XM5",
+      "releaseDate": "2022",
+      "category": 3,
+      "recommendedPrice": 400,
+      "description": "Wireless headphones with excellent noise cancellation.",
+      "visible": true,
+      "createdAt": 1668822400
+    },
+    {
+      "id": 5,
+      "model": "Samsung Galaxy Watch 5",
+      "releaseDate": "2023",
+      "category": 8,
+      "recommendedPrice": 349,
+      "description": "A smartwatch with advanced health tracking features.",
+      "visible": false,
+      "createdAt": 1681507200
+    },
+    {
+      "id": 6,
+      "model": "Nest Thermostat",
+      "releaseDate": "2020",
+      "category": 4,
+      "recommendedPrice": 219,
+      "description": "A smart thermostat that can learn your heating and cooling preferences.",
+      "visible": true,
+      "createdAt": 1577836800
+    },
+    {
+      "id": 7,
+      "model": "Ring Video Doorbell Pro 2",
+      "releaseDate": "2022",
+      "category": 7,
+      "recommendedPrice": 249,
+      "description": "A video doorbell with night vision and motion detection.",
+      "visible": true,
+      "createdAt": 1580518400
+    },
+    {
+      "id": 8,
+      "model": "Sony PlayStation 5",
+      "releaseDate": "2020",
+      "category": 9,
+      "recommendedPrice": 499,
+      "description": "A next-generation gaming console with powerful graphics.",
+      "visible": true,
+      "createdAt": 1610044800
+    },
+    {
+      "id": 9,
+      "model": "Google Nest Hub (2nd generation)",
+      "releaseDate": "2021",
+      "category": 3,
+      "recommendedPrice": 99,
+      "description": "A smart display with Google Assistant that can be used for controlling smart home devices, watching videos, and more.",
+      "visible": false,
+      "createdAt": 1640908800
+    },
+    {
+      "id": 10,
+      "model": "Apple Airpods Pro (2nd generation)",
+      "releaseDate": "2022",
+      "category": 3,
+      "recommendedPrice": 249,
+      "description": "Wireless earbuds with active noise cancellation and improved audio quality.",
+      "visible": true,
+      "createdAt": 1672406400
+    },
+    {
+      "id": 11,
+      "model": "Samsung Galaxy S23 Ultra",
+      "releaseDate": "2023",
+      "category": 1,
+      "recommendedPrice": 1188,
+      "description": "A high-end phone with a powerful camera system and S Pen stylus support.",
+      "visible": true,
+      "createdAt": 1675728000
+    },
+    {
+      "id": 12,
+      "model": "LG OLED C2 Series TV",
+      "releaseDate": "2022",
+      "category": 3,
+      "recommendedPrice": 1499,
+      "description": "A high-end OLED TV with excellent picture quality and gaming features.",
+      "visible": true,
+      "createdAt": 1678972800
+    },
+    {
+      "id": 13,
+      "model": "Instant Pot Duo Crisp",
+      "releaseDate": "2021",
+      "category": 4,
+      "recommendedPrice": 79,
+      "description": "A multi-cooker that can pressure cook, air fry, slow cook, and more.",
+      "visible": true,
+      "createdAt": 1682092800
+    },
+    {
+      "id": 14,
+      "model": "Dyson V15 Detect Absolute",
+      "releaseDate": "2022",
+      "category": 5,
+      "recommendedPrice": 699,
+      "description": "A cordless stick vacuum with laser dust detection and advanced cleaning features.",
+      "visible": true,
+      "createdAt": 1685222400
+    },
+    {
+      "id": 15,
+      "model": "Ecobee Smart Thermostat with Voice Control",
+      "releaseDate": "2022",
+      "category": 4,
+      "recommendedPrice": 249,
+      "description": "A smart thermostat with built-in voice control and Alexa integration.",
+      "visible": true,
+      "createdAt": 1688352000
+    }
+  ],
+  "categories":
+  [
+    {
+      "id": 1,
+      "label": "Computing Devices"
+    },
+    {
+      "id": 2,
+      "label": "Communication Devices"
+    },
+    {
+      "id": 3,
+      "label": "Consumer Electronics"
+    },
+    {
+      "id": 4,
+      "label": "Home Appliances"
+    },
+    {
+      "id": 5,
+      "label": "Medical Devices"
+    },
+    {
+      "id": 6,
+      "label": "Industrial Devices"
+    },
+    {
+      "id": 7,
+      "label": "Security Devices"
+    },
+    {
+      "id": 8,
+      "label": "Wearable Devices"
+    },
+    {
+      "id": 9,
+      "label": "Gaming Devices"
+    },
+    {
+      "id": 10,
+      "label": "Internet of Things (IoT) Devices"
+    }
+  ]
 }

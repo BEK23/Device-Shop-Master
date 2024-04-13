@@ -1,17 +1,12 @@
 <script setup>
 import { ref } from 'vue'
 import { Search } from 'lucide-vue-next'
+import { useCategoryStore } from '~/store/category.store'
 
 const search = ref('')
 const category = ref('')
 
-const categories = [
-  { value: 'Category 1', label: 'Category 1' },
-  { value: 'Category 2', label: 'Category 2' },
-  { value: 'Category 3', label: 'Category 3' },
-  { value: 'Category 4', label: 'Category 4' },
-  { value: 'Category 5', label: 'Category 5' },
-]
+const categoryStore = useCategoryStore()
 </script>
 
 <template>
@@ -20,7 +15,7 @@ const categories = [
       <el-col :span="4">
         <el-select v-model="category" placeholder="Category" clearable>
           <el-option
-            v-for="item in categories"
+            v-for="item in categoryStore.categories"
             :key="item.value"
             :label="item.label"
             :value="item.value"

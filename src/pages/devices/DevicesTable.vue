@@ -1,7 +1,9 @@
-<script setup>
+<script lang="ts" setup>
 import { useDevicesStore } from '~/store/devices.store'
+import { useCategoryStore } from '~/store/category.store'
 
 const store = useDevicesStore()
+const categoryStore = useCategoryStore()
 </script>
 
 <template>
@@ -14,17 +16,21 @@ const store = useDevicesStore()
       </el-table-column>
       <el-table-column prop="model" label="Model" min-width="400" />
 
-      <el-table-column prop="category" label="Category" width="250" />
+      <el-table-column prop="category" label="Category" width="250">
+        <template #default="{ row }">
+          <span>{{ categoryStore.getCategoryLabelById(row.category) }}</span>
+        </template>
+      </el-table-column>
 
-      <el-table-column prop="releaseDate" label="Release Date" width="150" />
+      <el-table-column prop="releaseDate" label="Release Date" width="150" align="center" />
 
-      <el-table-column prop="recommendedPrice" label="Rec. Price" width="150">
+      <el-table-column prop="recommendedPrice" label="Rec. Price" width="130" align="right">
         <template #default="{ row }">
           <span>$ {{ row.recommendedPrice.toFixed(2) }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column prop="createdAt" label="Created At" width="150" align="right" />
+      <el-table-column prop="createdAt" label="Created At" width="180" align="right" />
 
       <el-table-column align="right" width="50">
         <template #default="{ row }">

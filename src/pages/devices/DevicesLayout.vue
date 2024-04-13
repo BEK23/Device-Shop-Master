@@ -10,6 +10,8 @@ import { PATH } from '~/constants/path'
 import Breadcrumbs from '~/components/Breadcrumbs.vue'
 import { getDevicesList } from '~/api/devices.api'
 import { useDevicesStore } from '~/store/devices.store'
+import { useCategoryStore } from '~/store/category.store'
+import { getAllCategories } from '~/api/category.api'
 
 const router = useRoute()
 
@@ -17,12 +19,22 @@ const pageSize = ref(10)
 const currentPage = ref(1)
 
 const store = useDevicesStore()
+const categoryStore = useCategoryStore()
 
 useQuery({
   queryKey: ['devices', { currentPage, pageSize }],
   queryFn: () => getDevicesList({ currentPage, pageSize }),
   select: (response) => {
     store.setDevices(response.data)
+  },
+  refetchOnWindowFocus: false,
+})
+
+useQuery({
+  queryKey: ['categories'],
+  queryFn: () => getAllCategories(),
+  select: (response) => {
+    categoryStore.setCategories(response.data)
   },
   refetchOnWindowFocus: false,
 })
