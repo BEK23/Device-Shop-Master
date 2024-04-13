@@ -1,15 +1,14 @@
-<script setup>
+<script lang="ts" setup>
 import { computed, ref } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
 
 import { useRoute } from 'vue-router'
 import { useQuery } from '@tanstack/vue-query'
-import { data } from './data'
 import DevicesTable from './DevicesTable.vue'
 import DevicesToolbar from './components/DevicesToolbar.vue'
 import { PATH } from '~/constants/path'
 import Breadcrumbs from '~/components/Breadcrumbs.vue'
-import { getDevicesList } from '~/api/devices'
+import { getDevicesList } from '~/api/devices.api'
 import { useDevicesStore } from '~/store/devices.store'
 
 const router = useRoute()
@@ -20,18 +19,18 @@ const currentPage = ref(1)
 const store = useDevicesStore()
 
 useQuery({
-  queryKey: ['devices', { page: currentPage.value, limit: pageSize.value }],
-  queryFn: getDevicesList,
+  queryKey: ['devices', { currentPage, pageSize }],
+  queryFn: () => getDevicesList({ currentPage, pageSize }),
   select: (response) => {
     store.setDevices(response.data)
   },
   refetchOnWindowFocus: false,
 })
 
-function handleSizeChange(val) {
+function handleSizeChange(val: number) {
   pageSize.value = val
 }
-function handleCurrentChange(val) {
+function handleCurrentChange(val: number) {
   currentPage.value = val
 }
 
