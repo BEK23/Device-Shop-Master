@@ -23,20 +23,30 @@ server.use(bodyParser.json())
 
 server.get('/devices', (req, res) => {
   const devices = router.db.get('devices').value()
+  const category = Number.parseInt(req.query.category)
+  const search = req.query.search
+
+  let filteredDevices = devices
+
+  if (category)
+    filteredDevices = filteredDevices.filter(device => device.category === category)
+
+  if (search)
+    filteredDevices = filteredDevices.filter(device => device.model.toLowerCase().includes(search.toLowerCase()))
 
   const page = Number.parseInt(req.query.page) || 1
   const limit = Number.parseInt(req.query.limit) || 10
   const startIndex = (page - 1) * limit
   const endIndex = page * limit
 
-  const paginatedDevices = devices.slice(startIndex, endIndex)
+  const paginatedDevices = filteredDevices.slice(startIndex, endIndex)
 
   const response = {
     data: paginatedDevices,
     meta: {
       length: paginatedDevices.length,
-      total: devices.length,
-      totalPages: Math.ceil(devices.length / limit),
+      total: filteredDevices.length,
+      totalPages: Math.ceil(filteredDevices.length / limit),
       currentPage: page,
     },
   }

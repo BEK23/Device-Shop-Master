@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
 
 import { useRoute } from 'vue-router'
 import { useQuery } from '@tanstack/vue-query'
+import { storeToRefs } from 'pinia'
 import DevicesTable from './DevicesTable.vue'
 import DevicesToolbar from './components/DevicesToolbar.vue'
 import { PATH } from '~/constants/path'
@@ -15,17 +16,17 @@ import { getAllCategories } from '~/api/category.api'
 
 const router = useRoute()
 
-const pageSize = ref(10)
-const currentPage = ref(1)
-
-const store = useDevicesStore()
+const deviceStore = useDevicesStore()
 const categoryStore = useCategoryStore()
 
+const { devices, total, ...meta } = storeToRefs(deviceStore)
+const { setDevices, changePageSize, changeCurrentPage } = deviceStore
+
 useQuery({
-  queryKey: ['devices', { currentPage, pageSize }],
-  queryFn: () => getDevicesList({ currentPage, pageSize }),
+  queryKey: ['devices', meta],
+  queryFn: () => getDevicesList(meta),
   select: (response) => {
-    store.setDevices(response.data)
+    setDevices(response.data)
   },
   refetchOnWindowFocus: false,
 })
@@ -38,13 +39,6 @@ useQuery({
   },
   refetchOnWindowFocus: false,
 })
-
-function handleSizeChange(val: number) {
-  pageSize.value = val
-}
-function handleCurrentChange(val: number) {
-  currentPage.value = val
-}
 
 const drawer = computed(() => router.name !== 'devices.index')
 </script>
@@ -69,14 +63,14 @@ const drawer = computed(() => router.name !== 'devices.index')
     <DevicesTable />
 
     <el-pagination
-      :current-page="currentPage"
+      :current-page="meta.currentPage.value"
       :page-sizes="[10, 20, 30, 40]"
-      :page-size="pageSize"
+      :page-size="meta.pageSize.value"
       layout="total, sizes, ->, prev, pager, next, jumper"
-      :total="store.total"
+      :total="total"
       :small="true"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
+      @size-change="changePageSize"
+      @current-change="changeCurrentPage"
     />
   </el-scrollbar>
 

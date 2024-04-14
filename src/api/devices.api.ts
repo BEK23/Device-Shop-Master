@@ -5,10 +5,24 @@ import type { IDevice, IDeviceResponse, IDevicesListResponse } from '~/types/pro
 
 // GET
 
+interface GetDevicesListParams {
+  category: Ref<number | undefined>
+  pageSize: Ref<number>
+  currentPage: Ref<number>
+  search: Ref<string>
+}
+
 export function getDevicesList(
-  params: { currentPage: Ref<number>, pageSize: Ref<number> },
+  params: GetDevicesListParams,
 ): Promise<AxiosResponse<IDevicesListResponse>> {
-  return API.get('/devices', { params: { page: params.currentPage.value, limit: params.pageSize.value } })
+  return API.get('/devices', {
+    params: {
+      page: params.currentPage.value,
+      limit: params.pageSize.value,
+      category: params.category.value,
+      ...(params.search.value && { search: params.search.value }),
+    },
+  })
 }
 
 // POST
