@@ -8,6 +8,10 @@ export const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
+      path: PATH.home,
+      redirect: PATH.devices.index,
+    },
+    {
       path: PATH.devices.index,
       name: 'devices.index',
       component: DevicesLayout,

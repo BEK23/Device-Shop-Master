@@ -1,17 +1,26 @@
 <script lang="ts" setup>
 import type { CheckboxValueType, ElTable } from 'element-plus'
-import { useMutation } from '@tanstack/vue-query'
+import { useMutation, useQueryClient } from '@tanstack/vue-query'
 import { useRouter } from 'vue-router'
+import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
 import RowActions from './components/RowActions.vue'
 import { useDevicesStore } from '~/store/devices.store'
 import { useCategoryStore } from '~/store/category.store'
 import type { IDeviceResponse } from '~/types/product.interface'
-import { updateDevice } from '~/api/devices.api'
+import { deleteDevice, getDevicesList, updateDevice } from '~/api/devices.api'
 
 const router = useRouter()
 
+const centerDialogVisible = ref(false)
+const id = ref<number>()
+
 const store = useDevicesStore()
 const categoryStore = useCategoryStore()
+
+const { total, devices, ...meta } = storeToRefs(store)
+
+const queryClient = useQueryClient()
 
 const updateMutation = useMutation({
   mutationFn: updateDevice,
@@ -24,12 +33,33 @@ function handleVisibleChange(value: CheckboxValueType, data: IDeviceResponse) {
 function handleSortChange({ prop, order }: { prop: string, order: string }) {
   router.push({ query: { sort: prop, ...(order && { order }) } })
 }
+
+async function handleRemove() {
+  if (!id.value)
+    return
+
+  try {
+    await deleteDevice(id.value)
+
+    centerDialogVisible.value = false
+
+    await queryClient.prefetchQuery({ queryKey: ['devices', meta], queryFn: () => getDevicesList(meta) })
+  }
+  catch (error) {
+    console.error(error)
+  }
+}
+
+function openDialog(_id: number) {
+  centerDialogVisible.value = true
+  id.value = _id
+}
 </script>
 
 <template>
   <el-card shadow="never">
     <el-table
-      :data="store.devices"
+      :data="devices"
       fit
       :default-sort="{ prop: $route.query.sort as string, order: $route.query.order as ('ascending' | 'descending') }"
       @sort-change="handleSortChange"
@@ -61,9 +91,28 @@ function handleSortChange({ prop, order }: { prop: string, order: string }) {
         </template>
       </el-table-column>
 
-      <RowActions />
+      <RowActions :open-dialog="openDialog" />
     </el-table>
   </el-card>
+
+  <el-dialog
+    v-model="centerDialogVisible"
+    title="Warning"
+    width="500"
+    align-center
+  >
+    <span>Are you sure you want to delete this device?</span>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button @click="centerDialogVisible = false">
+          Cancel
+        </el-button>
+        <el-button type="danger" @click="handleRemove">
+          Delete
+        </el-button>
+      </div>
+    </template>
+  </el-dialog>
 </template>
 
 <style scoped>
