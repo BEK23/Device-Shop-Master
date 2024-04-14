@@ -14,7 +14,7 @@ const id = route.params.id as string
 
 const store = useDevicesStore()
 
-const { defineField, handleSubmit, resetForm } = useForm({
+const { defineField, handleSubmit, resetForm, meta } = useForm({
   validationSchema: deviceSchema,
 })
 
@@ -57,7 +57,7 @@ const onSubmit = handleSubmit(({ releaseDate, category, ...rest }) => createMuta
       <DeviceFields :define-field="defineField" />
 
       <el-form-item>
-        <el-button type="primary" native-type="submit">
+        <el-button type="primary" native-type="submit" :disabled="meta.pending || !meta.dirty">
           Save Changes
         </el-button>
       </el-form-item>

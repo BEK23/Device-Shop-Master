@@ -10,7 +10,7 @@ import { useDevicesStore } from '~/store/devices.store'
 
 const store = useDevicesStore()
 
-const { defineField, handleSubmit } = useForm({
+const { defineField, handleSubmit, meta } = useForm({
   validationSchema: deviceSchema,
 })
 
@@ -35,7 +35,7 @@ const onSubmit = handleSubmit(({ releaseDate, category, ...rest }) => createMuta
       <DeviceFields :define-field="defineField" />
 
       <el-form-item>
-        <el-button type="primary" native-type="submit">
+        <el-button type="primary" native-type="submit" :disabled="meta.pending || !meta.dirty">
           Create Device
         </el-button>
       </el-form-item>
