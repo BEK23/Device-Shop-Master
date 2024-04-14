@@ -70,6 +70,6 @@ function handleSortChange({ prop, order }: { prop: string, order: string }) {
 .el-table {
     width: 100%;
     border-radius: 10px;
-    border: 1px solid #363637;
+    border: 1px solid var(--el-table-border-color);
 }
 </style>

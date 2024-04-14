@@ -75,7 +75,7 @@ const toggleDark = useToggle(isDark)
 .el-card {
   margin-bottom: 20px!important;
   border-radius: 10px!important;
-  border: none!important;
+  --el-card-border-color: transparent
 }
 
 .el-input__wrapper, .el-select__wrapper {
