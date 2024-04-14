@@ -7,7 +7,7 @@ export interface IDevice {
   recommendedPrice: number
   description?: string
   visible?: boolean
-  photo?: string
+  photo?: File
 }
 
 // RESPONSE
@@ -20,6 +20,13 @@ export interface IDeviceResponse extends IDevice {
 export interface IDevicesListResponse {
   data: IDeviceResponse[]
   meta: IMeta
+}
+
+// REQUEST
+
+export interface IDeviceRequest extends IDevice {
+  id?: number
+  createdAt?: number
 }
 
 // QUERY PARAMS

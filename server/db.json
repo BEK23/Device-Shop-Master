@@ -1,16 +1,6 @@
 {
   "devices": [
     {
-      "releaseDate": 2021,
-      "category": 1,
-      "createdAt": 1713086735099,
-      "visible": true,
-      "description": "tggfbvc e updated",
-      "recommendedPrice": 3234.7,
-      "model": "test 2 updated 233 updated",
-      "id": 16
-    },
-    {
       "id": 1,
       "model": "Pixel 7 Pro",
       "releaseDate": "2023",

@@ -9,7 +9,7 @@ export const deviceSchema = toTypedSchema(
     recommendedPrice: yup.number().required().label('Recommended Price'),
     description: yup.string().label('Description'),
     visible: yup.boolean().label('Visible'),
-    photo: yup.string().label('Photo'),
+    photo: yup.mixed().label('Photo').optional(),
     createdAt: yup.number().optional(),
   }),
 )

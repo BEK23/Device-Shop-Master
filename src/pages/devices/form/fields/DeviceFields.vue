@@ -1,9 +1,12 @@
 <script setup>
+import { XIcon } from 'lucide-vue-next'
 import { useCategoryStore } from '~/store/category.store'
 
 const { defineField } = defineProps({
   defineField: Function,
 })
+
+const categoryStore = useCategoryStore()
 
 function elPlusConfig(state) {
   return {
@@ -21,14 +24,20 @@ const [releaseDate, releaseDateProps] = defineField('releaseDate', elPlusConfig)
 const [recommendedPrice, recommendedPriceProps] = defineField('recommendedPrice', elPlusConfig)
 const [description, descriptionProps] = defineField('description', elPlusConfig)
 const [visible, visibleProps] = defineField('visible', elPlusConfig)
-const [photoProps] = defineField('photo', elPlusConfig)
-
-const categoryStore = useCategoryStore()
+const [photo, photoProps] = defineField('photo', elPlusConfig)
 
 function disabledDate(time) {
   const date = new Date()
 
   return time.getTime() > date.getTime()
+}
+
+function handleChangeFile(file) {
+  photo.value = file.raw
+}
+
+function handleRemoveFile() {
+  photo.value = null
 }
 </script>
 
@@ -71,14 +80,25 @@ function disabledDate(time) {
   </el-form-item>
 
   <el-form-item label="Photo" v-bind="photoProps" style="width: 100%;">
-    <el-upload drag style="width: 100%;">
+    <el-upload drag style="width: 100%;" :auto-upload="false" :on-change="handleChangeFile">
       <el-icon class="el-icon--upload">
         <upload-filled />
       </el-icon>
       <div class="el-upload__text">
         Drop file here or <em>click to upload</em>
       </div>
+      <template #file>
+        <div />
+      </template>
     </el-upload>
+    <div v-if="photo" class="el-upload-list__item">
+      <div class="el-upload-list__item-name">
+        {{ photo?.name || photo }}
+      </div>
+      <div class="file-delete-button" @click="handleRemoveFile">
+        <XIcon size="16" />
+      </div>
+    </div>
   </el-form-item>
 </template>
 
@@ -86,5 +106,18 @@ function disabledDate(time) {
 .form-inline {
   display: inline-flex;
   align-items: end;
+}
+
+.el-upload-list__item {
+  position: relative;
+  padding-left: 8px;
+}
+
+.file-delete-button {
+  cursor: pointer;
+  color: #ff4d4f;
+  position: absolute;
+  right: 8px;
+  top: 2px;
 }
 </style>

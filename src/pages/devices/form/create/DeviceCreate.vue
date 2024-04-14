@@ -16,15 +16,19 @@ const { defineField, handleSubmit, meta } = useForm({
 
 const createMutation = useMutation({
   mutationFn: createDevice,
-  onSuccess: () => {
-    store.changeCurrentPage(1)
+  onSuccess: ({ data }) => {
+    if (store.currentPage === 1)
+      store.addDevice(data)
+    else store.changeCurrentPage(1)
+
     router.push(PATH.devices.index)
   },
 })
 
-const onSubmit = handleSubmit(({ releaseDate, category, ...rest }) => createMutation.mutate({
+const onSubmit = handleSubmit(({ releaseDate, category, photo, ...rest }) => createMutation.mutate({
   releaseDate: releaseDate.getFullYear(),
   category: Number(category),
+  photo: photo as File,
   ...rest,
 }))
 </script>

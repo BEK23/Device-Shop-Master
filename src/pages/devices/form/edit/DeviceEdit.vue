@@ -30,6 +30,7 @@ useQuery({
       description: data.description,
       visible: data.visible,
       createdAt: data.createdAt,
+      photo: data.photo,
     } })
   },
   refetchOnWindowFocus: false,
@@ -43,10 +44,11 @@ const updateMutation = useMutation({
   },
 })
 
-const onSubmit = handleSubmit(({ releaseDate, category, ...rest }) => updateMutation.mutate({
-  id,
+const onSubmit = handleSubmit(({ releaseDate, category, photo, ...rest }) => updateMutation.mutate({
+  id: Number.parseInt(id),
   releaseDate: releaseDate.getFullYear(),
   category: Number(category),
+  photo: photo as File,
   ...rest,
 }))
 </script>

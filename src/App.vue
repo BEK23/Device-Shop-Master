@@ -100,4 +100,8 @@ const toggleDark = useToggle(isDark)
 .el-checkbox__inner {
   --el-checkbox-border-radius: 4px
 }
+
+.el-upload-dragger {
+  --el-upload-dragger-padding-horizontal: 20px;
+}
 </style>

@@ -1,7 +1,7 @@
 import type { AxiosResponse } from 'axios'
 import type { ComputedRef, Ref } from 'vue'
 import { API } from './api'
-import type { IDevice, IDeviceResponse, IDevicesListResponse } from '~/types/product.interface'
+import type { IDeviceRequest, IDeviceResponse, IDevicesListResponse } from '~/types/product.interface'
 
 // GET
 
@@ -35,14 +35,26 @@ export function getDeviceByID(id: string): Promise<AxiosResponse<IDeviceResponse
 
 // POST
 
-export function createDevice(data: IDevice): Promise<AxiosResponse<IDeviceResponse>> {
-  return API.post('/devices', data)
+export function createDevice(data: IDeviceRequest): Promise<AxiosResponse<IDeviceResponse>> {
+  const formData = new FormData()
+  Object.entries(data).forEach(([key, value]) => {
+    formData.append(key, value)
+  })
+
+  return API.postForm('/devices', formData)
 }
 
 // PUT
 
-export function updateDevice({ id, ...data }: Partial<IDevice> & { id: string | number }): Promise<AxiosResponse<IDeviceResponse>> {
-  return API.put(`/devices/${id}`, data)
+export function updateDevice(data: IDeviceRequest): Promise<AxiosResponse<IDeviceResponse>> {
+  const { id } = data
+
+  const formData = new FormData()
+  Object.entries(data).forEach(([key, value]) => {
+    formData.append(key, value)
+  })
+
+  return API.putForm(`/devices/${id}`, formData)
 }
 
 // DELETE

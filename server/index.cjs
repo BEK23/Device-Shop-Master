@@ -1,6 +1,7 @@
 const path = require('node:path')
 const jsonServer = require('json-server')
 const bodyParser = require('body-parser')
+const multer = require('multer')
 // const chokidar = require('chokidar')
 
 const server = jsonServer.create()
@@ -65,12 +66,55 @@ server.get('/devices', (req, res) => {
   res.json(response)
 })
 
-server.post('/devices', (req, res) => {
+const upload = multer({ dest: 'server/uploads/' })
+
+server.post('/devices', upload.single('photo'), (req, res) => {
   const devices = router.db.get('devices').value()
-  const newDevice = { ...req.body, id: devices.length + 1, createdAt: new Date().getTime() }
+
+  const { category, createdAt, recommendedPrice, visible, ...rest } = req.body
+
+  console.log('Create: ', req.file)
+
+  const newDevice = {
+    ...rest,
+    id: devices.length + 1,
+    createdAt: new Date().getTime(),
+    category: Number.parseInt(category),
+    createdAt: Number.parseInt(createdAt),
+    recommendedPrice: Number.parseFloat(recommendedPrice),
+    visible: visible === 'true',
+    photo: req.file?.originalname,
+  }
+
   devices.unshift(newDevice)
   router.db.set('devices', devices).write()
   res.status(201).json(newDevice)
+})
+
+server.put('/devices/:id', upload.single('photo'), (req, res) => {
+  const devices = router.db.get('devices').value()
+  const deviceId = Number.parseInt(req.params.id)
+
+  const { id, photo, createdAt, category, recommendedPrice, visible, ...rest } = req.body
+
+  const updatedDeviceIndex = devices.findIndex(device => device.id === deviceId)
+  if (updatedDeviceIndex === -1) {
+    res.status(404).json({ error: 'Device not found' })
+    return
+  }
+
+  const updatedDevice = {
+    ...rest,
+    id: Number.parseInt(id),
+    category: Number.parseInt(category),
+    recommendedPrice: Number.parseFloat(recommendedPrice),
+    createdAt: Number.parseInt(createdAt),
+    visible: visible === 'true',
+    photo: req.file?.originalname ?? photo,
+  }
+  devices[updatedDeviceIndex] = updatedDevice
+  router.db.set('devices', devices).write()
+  res.json(updatedDevice)
 })
 
 server.use(router)
