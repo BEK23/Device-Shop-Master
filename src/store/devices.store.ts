@@ -21,6 +21,12 @@ export const useDevicesStore = defineStore('devices', () => {
     total.value++
   }
 
+  function updateDevice(device: IDeviceResponse) {
+    const index = devices.value.findIndex(d => d.id === device.id)
+    if (index !== -1)
+      devices.value.splice(index, 1, device)
+  }
+
   function changePageSize(val: number) {
     pageSize.value = val
   }
@@ -33,6 +39,7 @@ export const useDevicesStore = defineStore('devices', () => {
     total,
     setDevices,
     addDevice,
+    updateDevice,
     pageSize,
     currentPage,
     category,

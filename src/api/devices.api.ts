@@ -25,12 +25,21 @@ export function getDevicesList(
   })
 }
 
-// POST
-
-export function createDevice(device: IDevice): Promise<AxiosResponse<IDeviceResponse>> {
-  return API.post('/devices', device)
+export function getDeviceByID(id: string): Promise<AxiosResponse<IDeviceResponse>> {
+  return API.get(`/devices/${id}`)
 }
 
+// POST
+
+export function createDevice(data: IDevice): Promise<AxiosResponse<IDeviceResponse>> {
+  return API.post('/devices', data)
+}
+
+// PUT
+
+export function updateDevice({ id, ...data }: Partial<IDevice> & { id: string }): Promise<AxiosResponse<IDeviceResponse>> {
+  return API.put(`/devices/${id}`, data)
+}
 
 // DELETE
 export function deleteDevice(id: number): Promise<AxiosResponse> {

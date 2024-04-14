@@ -5,6 +5,7 @@ import { storeToRefs } from 'pinia'
 import { useDevicesStore } from '~/store/devices.store'
 import { useCategoryStore } from '~/store/category.store'
 import { deleteDevice, getDevicesList } from '~/api/devices.api'
+import { PATH } from '~/constants/path'
 
 const store = useDevicesStore()
 const categoryStore = useCategoryStore()
@@ -48,7 +49,11 @@ async function handleRemove(id: number) {
         </template>
       </el-table-column>
 
-      <el-table-column prop="createdAt" label="Created At" width="180" align="right" />
+      <el-table-column prop="createdAt" label="Created At" width="180" align="right">
+        <template #default="{ row }">
+          {{ new Date(row.createdAt).toLocaleString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }) }}
+        </template>
+      </el-table-column>
 
       <el-table-column align="right" width="50">
         <template #default="{ row }">
@@ -60,7 +65,7 @@ async function handleRemove(id: number) {
               <EllipsisVerticalIcon class="action-trigger" :size="16" />
             </template>
             <div class="action-content">
-              <el-button @click="() => console.log('Edit', row.id)">
+              <el-button @click="$router.push(PATH.devices.edit.replace(':id', row.id))">
                 <Edit3Icon :size="16" /> Edit
               </el-button>
               <el-button type="danger" @click="() => handleRemove(row.id)">

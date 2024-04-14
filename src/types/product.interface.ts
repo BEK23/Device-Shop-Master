@@ -14,7 +14,7 @@ export interface IDevice {
 
 export interface IDeviceResponse extends IDevice {
   id: number
-  createdAt: string
+  createdAt: number
 }
 
 export interface IDevicesListResponse {

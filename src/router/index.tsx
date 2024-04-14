@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { PATH } from '~/constants/path'
 import DevicesLayout from '~/pages/devices/DevicesLayout.vue'
 import DeviceCreate from '~/pages/devices/form/create/DeviceCreate.vue'
+import DeviceEdit from '~/pages/devices/form/edit/DeviceEdit.vue'
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -15,6 +16,11 @@ export const router = createRouter({
           path: PATH.devices.create,
           name: 'devices.create',
           component: DeviceCreate,
+        },
+        {
+          path: PATH.devices.edit,
+          name: 'devices.edit',
+          component: DeviceEdit,
         },
       ],
     },

@@ -1,9 +1,8 @@
 <script lang="ts" setup>
 import { useForm } from 'vee-validate'
-import * as yup from 'yup'
-import { toTypedSchema } from '@vee-validate/yup'
 import { useMutation } from '@tanstack/vue-query'
 import DeviceFields from '../fields/DeviceFields.vue'
+import { deviceSchema } from '../schema'
 import { createDevice } from '~/api/devices.api'
 import { router } from '~/router'
 import { PATH } from '~/constants/path'
@@ -11,20 +10,8 @@ import { useDevicesStore } from '~/store/devices.store'
 
 const store = useDevicesStore()
 
-const schema = toTypedSchema(
-  yup.object({
-    model: yup.string().required().label('Model'),
-    category: yup.string().required().label('Category'),
-    releaseDate: yup.date().required().label('Release Date'),
-    recommendedPrice: yup.number().required().label('Recommended Price'),
-    description: yup.string().label('Description'),
-    visible: yup.boolean().label('Visible'),
-    photo: yup.string().label('Photo'),
-  }),
-)
-
 const { defineField, handleSubmit } = useForm({
-  validationSchema: schema,
+  validationSchema: deviceSchema,
 })
 
 const createMutation = useMutation({
