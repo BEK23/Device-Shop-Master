@@ -4,20 +4,42 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run preview\"",
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "server": "node ./server/index.cjs"
   },
   "dependencies": {
-    "vue": "^3.4.21"
+    "@element-plus/icons-vue": "^2.3.1",
+    "@tanstack/vue-query": "^5.29.0",
+    "@types/node": "^20.12.7",
+    "@vee-validate/yup": "^4.12.6",
+    "@vueuse/core": "^10.9.0",
+    "axios": "^1.6.8",
+    "element-plus": "^2.6.3",
+    "lucide-vue-next": "^0.368.0",
+    "multer": "1.4.5-lts.1",
+    "nodemon": "^3.1.0",
+    "pinia": "^2.1.7",
+    "vee-validate": "^4.12.6",
+    "vue": "^3.4.21",
+    "vue-router": "4",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.13.3",
     "@vitejs/plugin-vue": "^5.0.4",
+    "body-parser": "^1.20.2",
+    "concurrently": "^8.2.2",
     "eslint": "^9.0.0",
+    "json-server": "0.17.4",
+    "sass": "^1.75.0",
     "typescript": "^5.2.2",
+    "unplugin-auto-import": "^0.17.5",
+    "unplugin-vue-components": "^0.26.0",
     "vite": "^5.2.0",
     "vue-tsc": "^2.0.6"
   }
