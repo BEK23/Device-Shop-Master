@@ -47,39 +47,31 @@ const drawer = computed(() => route.name === 'devices.create' || route.name === 
 </script>
 
 <template>
-  <el-scrollbar style="height: 100%">
-    <el-row justify="space-between" align="bottom">
-      <Breadcrumbs :breadcrumbs="[{ title: 'Devices' }]" />
-      <router-link :to="PATH.devices.create">
-        <el-button type="primary" :icon="Plus">
-          Add Device
-        </el-button>
-      </router-link>
-    </el-row>
+  <el-row justify="space-between" align="bottom">
+    <Breadcrumbs :breadcrumbs="[{ title: 'Devices' }]" />
+    <router-link :to="PATH.devices.create">
+      <el-button type="primary" :icon="Plus">
+        Add Device
+      </el-button>
+    </router-link>
+  </el-row>
 
-    <DevicesToolbar />
+  <DevicesToolbar />
 
-    <DevicesTable />
+  <DevicesTable />
 
-    <el-pagination
-      :current-page="meta.currentPage.value"
-      :page-sizes="[10, 20, 30, 40]"
-      :page-size="meta.pageSize.value"
-      layout="total, sizes, ->, prev, pager, next, jumper"
-      :total="total"
-      :small="true"
-      @size-change="changePageSize"
-      @current-change="changeCurrentPage"
-    />
-  </el-scrollbar>
+  <el-pagination
+    :current-page="meta.currentPage.value"
+    :page-sizes="[10, 20, 30, 40]"
+    :page-size="meta.pageSize.value"
+    layout="total, sizes, ->, prev, pager, next, jumper"
+    :total="total"
+    :small="true"
+    @size-change="changePageSize"
+    @current-change="changeCurrentPage"
+  />
 
   <el-drawer v-model="drawer" :with-header="false" size="40%" @close="$router.replace(PATH.devices.index)">
     <router-view />
   </el-drawer>
 </template>
-
-<style scoped>
-.el-scrollbar {
-  padding: 0 30px;
-}
-</style>

@@ -11,17 +11,29 @@ const toggleDark = useToggle(isDark)
     <el-header>
       <div class="logo">
         LOGO
-        <!-- <img src="./logo.png" alt="Logo"> -->
       </div>
       <div class="right-section">
         <div class="theme-toggle" @click="toggleDark()">
           <MoonIcon v-if="isDark" :size="20" />
           <SunIcon v-else :size="20" />
         </div>
+        <a
+          href="https://github.com/BEK23/Device-Shop-Master" target="_blank"
+        >
+          <el-avatar
+            :size="24"
+            src="https://cdn.worldvectorlogo.com/logos/github-icon-2.svg"
+            alt="Github"
+          />
+        </a>
       </div>
     </el-header>
     <el-main>
-      <router-view />
+      <el-scrollbar style="height: 100%">
+        <div class="wrapper">
+          <router-view />
+        </div>
+      </el-scrollbar>
     </el-main>
   </el-container>
 </template>
@@ -54,6 +66,7 @@ const toggleDark = useToggle(isDark)
 .right-section {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 .right-section > * {
@@ -62,12 +75,21 @@ const toggleDark = useToggle(isDark)
 
 .theme-toggle {
   cursor: pointer;
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 .el-main {
-  padding: 20px 0;
+  padding: 0;
   flex-grow: 1;
+}
+
+.el-scrollbar {
+  padding: 0 30px;
+  box-sizing: border-box
+}
+
+.wrapper{
+  padding: 20px 0;
 }
 </style>
 
@@ -83,9 +105,11 @@ const toggleDark = useToggle(isDark)
   box-sizing: content-box!important;
 }
 
-.el-input__wrapper, .el-select__wrapper, .el-popper, .el-popover.el-popper, .el-button, .el-textarea__inner, .el-upload-dragger  {
+.el-input__wrapper, .el-select__wrapper, .el-popper, .el-popover.el-popper, .el-button, .el-textarea__inner, .el-upload-dragger, .el-dialog  {
   --el-border-radius-base: 10px;
   --el-input-border-radius: 10px;
+  --el-border-radius-small: 10px;
+  --el-popover-border-radius: 10px;
   border-radius: 10px
 }
 
