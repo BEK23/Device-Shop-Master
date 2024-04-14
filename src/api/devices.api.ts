@@ -1,5 +1,5 @@
 import type { AxiosResponse } from 'axios'
-import type { Ref } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 import { API } from './api'
 import type { IDevice, IDeviceResponse, IDevicesListResponse } from '~/types/product.interface'
 
@@ -10,6 +10,8 @@ interface GetDevicesListParams {
   pageSize: Ref<number>
   currentPage: Ref<number>
   search: Ref<string>
+  sort?: ComputedRef<string>
+  order?: ComputedRef<string>
 }
 
 export function getDevicesList(
@@ -21,6 +23,8 @@ export function getDevicesList(
       limit: params.pageSize.value,
       category: params.category.value,
       ...(params.search.value && { search: params.search.value }),
+      ...(params.sort && { sort: params.sort.value }),
+      ...(params.order && { order: params.order.value }),
     },
   })
 }

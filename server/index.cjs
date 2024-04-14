@@ -25,6 +25,8 @@ server.get('/devices', (req, res) => {
   const devices = router.db.get('devices').value()
   const category = Number.parseInt(req.query.category)
   const search = req.query.search
+  const sort = req.query.sort
+  const order = req.query.order ?? 'ascending'
 
   let filteredDevices = devices
 
@@ -33,6 +35,15 @@ server.get('/devices', (req, res) => {
 
   if (search)
     filteredDevices = filteredDevices.filter(device => device.model.toLowerCase().includes(search.toLowerCase()))
+
+  if (sort) {
+    filteredDevices = filteredDevices.sort((a, b) => {
+      if (order === 'ascending')
+        return a[sort] > b[sort] ? 1 : -1
+      else
+        return a[sort] < b[sort] ? 1 : -1
+    })
+  }
 
   const page = Number.parseInt(req.query.page) || 1
   const limit = Number.parseInt(req.query.limit) || 10

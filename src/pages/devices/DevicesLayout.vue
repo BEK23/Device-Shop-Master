@@ -14,7 +14,7 @@ import { useDevicesStore } from '~/store/devices.store'
 import { useCategoryStore } from '~/store/category.store'
 import { getAllCategories } from '~/api/category.api'
 
-const router = useRoute()
+const route = useRoute()
 
 const deviceStore = useDevicesStore()
 const categoryStore = useCategoryStore()
@@ -22,9 +22,12 @@ const categoryStore = useCategoryStore()
 const { devices, total, ...meta } = storeToRefs(deviceStore)
 const { setDevices, changePageSize, changeCurrentPage } = deviceStore
 
+const sort = computed(() => route.query.sort as string)
+const order = computed(() => route.query.order as string)
+
 useQuery({
-  queryKey: ['devices', meta],
-  queryFn: () => getDevicesList(meta),
+  queryKey: ['devices', { ...meta, sort, order }],
+  queryFn: () => getDevicesList({ ...meta, sort, order }),
   select: (response) => {
     setDevices(response.data)
   },
@@ -40,7 +43,7 @@ useQuery({
   refetchOnWindowFocus: false,
 })
 
-const drawer = computed(() => router.name !== 'devices.index')
+const drawer = computed(() => route.name === 'devices.create' || route.name === 'devices.edit')
 </script>
 
 <template>
