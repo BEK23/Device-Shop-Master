@@ -35,7 +35,7 @@ useQuery({
   refetchOnWindowFocus: false,
 })
 
-const createMutation = useMutation({
+const updateMutation = useMutation({
   mutationFn: updateDevice,
   onSuccess: ({ data }) => {
     store.updateDevice(data)
@@ -43,7 +43,7 @@ const createMutation = useMutation({
   },
 })
 
-const onSubmit = handleSubmit(({ releaseDate, category, ...rest }) => createMutation.mutate({
+const onSubmit = handleSubmit(({ releaseDate, category, ...rest }) => updateMutation.mutate({
   id,
   releaseDate: releaseDate.getFullYear(),
   category: Number(category),

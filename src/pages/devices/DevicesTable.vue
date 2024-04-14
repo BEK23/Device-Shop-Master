@@ -1,27 +1,21 @@
 <script lang="ts" setup>
-import { Edit3Icon, EllipsisVerticalIcon, Trash2Icon } from 'lucide-vue-next'
-import { useQueryClient } from '@tanstack/vue-query'
-import { storeToRefs } from 'pinia'
+import type { CheckboxValueType } from 'element-plus'
+import { useMutation } from '@tanstack/vue-query'
+import RowActions from './components/RowActions.vue'
 import { useDevicesStore } from '~/store/devices.store'
 import { useCategoryStore } from '~/store/category.store'
-import { deleteDevice, getDevicesList } from '~/api/devices.api'
-import { PATH } from '~/constants/path'
+import type { IDeviceResponse } from '~/types/product.interface'
+import { updateDevice } from '~/api/devices.api'
 
 const store = useDevicesStore()
 const categoryStore = useCategoryStore()
 
-const { total, devices, ...meta } = storeToRefs(store)
+const updateMutation = useMutation({
+  mutationFn: updateDevice,
+})
 
-const queryClient = useQueryClient()
-
-async function handleRemove(id: number) {
-  try {
-    await deleteDevice(id)
-    await queryClient.prefetchQuery({ queryKey: ['devices', meta], queryFn: () => getDevicesList(meta) })
-  }
-  catch (error) {
-    console.error(error)
-  }
+function handleVisibleChange(value: CheckboxValueType, data: IDeviceResponse) {
+  updateMutation.mutate({ ...data, visible: value as boolean })
 }
 </script>
 
@@ -30,7 +24,7 @@ async function handleRemove(id: number) {
     <el-table :data="store.devices" fit>
       <el-table-column prop="visible" label="Visible" width="80" align="center">
         <template #default="{ row }">
-          <el-checkbox v-model="row.visible" />
+          <el-checkbox v-model="row.visible" @change="(value) => handleVisibleChange(value, row)" />
         </template>
       </el-table-column>
       <el-table-column prop="model" label="Model" min-width="400" />
@@ -55,26 +49,7 @@ async function handleRemove(id: number) {
         </template>
       </el-table-column>
 
-      <el-table-column align="right" width="50">
-        <template #default="{ row }">
-          <el-popover
-            placement="bottom-start"
-            trigger="click"
-          >
-            <template #reference>
-              <EllipsisVerticalIcon class="action-trigger" :size="16" />
-            </template>
-            <div class="action-content">
-              <el-button @click="$router.push(PATH.devices.edit.replace(':id', row.id))">
-                <Edit3Icon :size="16" /> Edit
-              </el-button>
-              <el-button type="danger" @click="() => handleRemove(row.id)">
-                <Trash2Icon :size="16" /> Delete
-              </el-button>
-            </div>
-          </el-popover>
-        </template>
-      </el-table-column>
+      <RowActions />
     </el-table>
   </el-card>
 </template>
@@ -84,26 +59,5 @@ async function handleRemove(id: number) {
     width: 100%;
     border-radius: 10px;
     border: 1px solid #363637;
-}
-
-.action-trigger {
-    cursor: pointer;
-    padding: 4px;
-    outline: none
-}
-
-.action-content {
-    display: flex;
-    flex-direction: column;
-}
-
-.action-content > * {
-    margin: 0;
-    border: none;
-    justify-content: start;
-}
-
-.action-content > * svg {
-    margin-right: 6px;
 }
 </style>

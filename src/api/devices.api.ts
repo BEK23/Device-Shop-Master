@@ -37,7 +37,7 @@ export function createDevice(data: IDevice): Promise<AxiosResponse<IDeviceRespon
 
 // PUT
 
-export function updateDevice({ id, ...data }: Partial<IDevice> & { id: string }): Promise<AxiosResponse<IDeviceResponse>> {
+export function updateDevice({ id, ...data }: Partial<IDevice> & { id: string | number }): Promise<AxiosResponse<IDeviceResponse>> {
   return API.put(`/devices/${id}`, data)
 }
 
