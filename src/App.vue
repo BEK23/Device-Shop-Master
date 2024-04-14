@@ -73,17 +73,31 @@ const toggleDark = useToggle(isDark)
 
 <style>
 .el-card {
-  margin-bottom: 20px;
-  border-radius: 10px;
-  border: none
+  margin-bottom: 20px!important;
+  border-radius: 10px!important;
+  border: none!important;
 }
 
 .el-input__wrapper, .el-select__wrapper {
-  padding: 4px 12px;
-  box-sizing: content-box;
+  padding: 4px 12px!important;
+  box-sizing: content-box!important;
 }
 
-.el-input__wrapper, .el-select__wrapper, .el-popper, .el-popover.el-popper, .el-button  {
-  border-radius: 10px;
+.el-input__wrapper, .el-select__wrapper, .el-popper, .el-popover.el-popper, .el-button, .el-textarea__inner, .el-upload-dragger  {
+  --el-border-radius-base: 10px;
+  --el-input-border-radius: 10px;
+  border-radius: 10px
+}
+
+.el-input-number__decrease, .el-input-number__increase {
+  --el-border-radius-base: 10px
+}
+
+.el-date-editor.el-input{
+  height: 40px!important;
+}
+
+.el-checkbox__inner {
+  --el-checkbox-border-radius: 4px
 }
 </style>

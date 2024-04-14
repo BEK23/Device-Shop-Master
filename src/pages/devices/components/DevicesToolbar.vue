@@ -51,3 +51,9 @@ const handleSearchInputChange = (function () {
     </el-row>
   </el-card>
 </template>
+
+<style scoped>
+.el-card {
+  margin-top: 20px;
+}
+</style>

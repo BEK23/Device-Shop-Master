@@ -48,11 +48,7 @@ const drawer = computed(() => router.name !== 'devices.index')
     <el-row justify="space-between" align="bottom">
       <Breadcrumbs :breadcrumbs="[{ title: 'Devices' }]" />
       <router-link :to="PATH.devices.create">
-        <el-button
-          type="primary"
-          :icon="Plus"
-          style="margin-bottom: 20px;"
-        >
+        <el-button type="primary" :icon="Plus">
           Add Device
         </el-button>
       </router-link>

@@ -50,8 +50,4 @@ defineProps<{
 .home-link svg {
   margin-right: 4px;
 }
-
-.el-breadcrumb {
-  margin-bottom: 20px;
-}
 </style>
