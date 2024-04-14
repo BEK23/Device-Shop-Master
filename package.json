@@ -4,13 +4,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run dev\"",
+    "start": "concurrently \"npm run server\" \"npm run preview\"",
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "server": "nodemon ./server/index.cjs"
+    "server": "node ./server/index.cjs"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
