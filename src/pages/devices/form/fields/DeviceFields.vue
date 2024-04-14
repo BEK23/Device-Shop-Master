@@ -46,7 +46,7 @@ function handleRemoveFile() {
     <el-input v-model="model" />
   </el-form-item>
 
-  <el-row gutter="12">
+  <el-row :gutter="12">
     <el-col :span="12">
       <el-form-item label="Category" v-bind="categoryProps">
         <el-select v-model="category">
@@ -68,7 +68,7 @@ function handleRemoveFile() {
   </el-row>
 
   <el-form-item label="Recommended Price" v-bind="recommendedPriceProps">
-    <el-input-number v-model="recommendedPrice" :precision="2" :step="0.1" min="0" />
+    <el-input-number v-model="recommendedPrice" :precision="2" :step="0.1" :min="0" />
   </el-form-item>
 
   <el-form-item label="Description" v-bind="descriptionProps">
