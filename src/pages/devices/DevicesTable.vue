@@ -1,9 +1,27 @@
 <script lang="ts" setup>
+import { Edit3Icon, EllipsisVerticalIcon, Trash2Icon } from 'lucide-vue-next'
+import { useQueryClient } from '@tanstack/vue-query'
+import { storeToRefs } from 'pinia'
 import { useDevicesStore } from '~/store/devices.store'
 import { useCategoryStore } from '~/store/category.store'
+import { deleteDevice, getDevicesList } from '~/api/devices.api'
 
 const store = useDevicesStore()
 const categoryStore = useCategoryStore()
+
+const { total, devices, ...meta } = storeToRefs(store)
+
+const queryClient = useQueryClient()
+
+async function handleRemove(id: number) {
+  try {
+    await deleteDevice(id)
+    await queryClient.prefetchQuery({ queryKey: ['devices', meta], queryFn: () => getDevicesList(meta) })
+  }
+  catch (error) {
+    console.error(error)
+  }
+}
 </script>
 
 <template>
@@ -45,7 +63,7 @@ const categoryStore = useCategoryStore()
               <el-button @click="() => console.log('Edit', row.id)">
                 <Edit3Icon :size="16" /> Edit
               </el-button>
-              <el-button type="danger" @click="() => console.log('Delete', row.id)">
+              <el-button type="danger" @click="() => handleRemove(row.id)">
                 <Trash2Icon :size="16" /> Delete
               </el-button>
             </div>

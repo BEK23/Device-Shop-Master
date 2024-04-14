@@ -29,8 +29,8 @@ const { defineField, handleSubmit } = useForm({
 
 const createMutation = useMutation({
   mutationFn: createDevice,
-  onSuccess: (response) => {
-    store.addDevice(response.data)
+  onSuccess: () => {
+    store.changeCurrentPage(1)
     router.push(PATH.devices.index)
   },
 })

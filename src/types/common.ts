@@ -6,6 +6,6 @@ export interface IMeta {
 }
 
 export interface ITableQueryParams {
-  page: number
-  limit: number
+  pageSize: number
+  currentPage: number
 }

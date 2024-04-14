@@ -30,3 +30,9 @@ export function getDevicesList(
 export function createDevice(device: IDevice): Promise<AxiosResponse<IDeviceResponse>> {
   return API.post('/devices', device)
 }
+
+
+// DELETE
+export function deleteDevice(id: number): Promise<AxiosResponse> {
+  return API.delete(`/devices/${id}`)
+}

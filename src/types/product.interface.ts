@@ -13,7 +13,7 @@ export interface IDevice {
 // RESPONSE
 
 export interface IDeviceResponse extends IDevice {
-  id: string
+  id: number
   createdAt: string
 }
 
@@ -26,5 +26,5 @@ export interface IDevicesListResponse {
 
 export interface IDevicesListQueryParams extends ITableQueryParams {
   search?: string
-  category?: string
+  category?: number
 }
