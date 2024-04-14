@@ -71,16 +71,14 @@ const upload = multer({ dest: 'server/uploads/' })
 server.post('/devices', upload.single('photo'), (req, res) => {
   const devices = router.db.get('devices').value()
 
-  const { category, createdAt, recommendedPrice, visible, ...rest } = req.body
-
-  console.log('Create: ', req.file)
+  const { category, recommendedPrice, visible, ...rest } = req.body
 
   const newDevice = {
     ...rest,
     id: devices.length + 1,
     createdAt: new Date().getTime(),
     category: Number.parseInt(category),
-    createdAt: Number.parseInt(createdAt),
+    createdAt: new Date().getTime(),
     recommendedPrice: Number.parseFloat(recommendedPrice),
     visible: visible === 'true',
     photo: req.file?.originalname,

@@ -51,7 +51,8 @@ export function updateDevice(data: IDeviceRequest): Promise<AxiosResponse<IDevic
 
   const formData = new FormData()
   Object.entries(data).forEach(([key, value]) => {
-    formData.append(key, value)
+    if (value)
+      formData.append(key, value)
   })
 
   return API.putForm(`/devices/${id}`, formData)
