@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { PATH } from '~/constants/path'
-import DevicesLayout from '~/pages/devices/DevicesLayout.vue'
-import DeviceCreate from '~/pages/devices/form/create/DeviceCreate.vue'
-import DeviceEdit from '~/pages/devices/form/edit/DeviceEdit.vue'
+import DevicesLayout from '~/components/layouts/DevicesLayout.vue'
+import DeviceCreate from '~/pages/devices/create/DeviceCreate.vue'
+import DeviceEdit from '~/pages/devices/edit/DeviceEdit.vue'
 
 export const router = createRouter({
   history: createWebHistory(),
