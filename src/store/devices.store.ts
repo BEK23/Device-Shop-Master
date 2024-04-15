@@ -1,50 +1,60 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { API } from '~/api/api'
 import type { IDeviceResponse, IDevicesListResponse } from '~/types/product.interface'
 
-export const useDevicesStore = defineStore('devices', () => {
-  const devices = ref<IDeviceResponse[]>([])
-  const total = ref(0)
+interface IDevicesStore {
+  devices: IDeviceResponse[]
+  total: number
+  pageSize: number
+  currentPage: number
+  category?: number
+  search: string
+}
 
-  const pageSize = ref(10)
-  const currentPage = ref(1)
-  const category = ref<number | undefined>()
-  const search = ref('')
+export const useDevicesStore = defineStore('devices', {
+  state: (): IDevicesStore => ({
+    devices: [],
+    total: 0,
+    pageSize: 10,
+    currentPage: 1,
+    category: undefined,
+    search: '',
+  }),
+  actions: {
+    async getDevicesList(sort?: string, order?: string) {
+      try {
+        const { data } = await API.get<IDevicesListResponse>('/devices', {
+          params: {
+            page: this.currentPage,
+            limit: this.pageSize,
+            ...(this.category && { category: this.category }),
+            ...(this.search && { search: this.search }),
+            ...(sort && { sort }),
+            ...(order && { order }),
+          },
+        })
 
-  function setDevices(response: IDevicesListResponse) {
-    devices.value = response.data
-    total.value = response.meta.total
-  }
-
-  function addDevice(device: IDeviceResponse) {
-    devices.value.unshift(device)
-    total.value++
-  }
-
-  function updateDevice(device: IDeviceResponse) {
-    const index = devices.value.findIndex(d => d.id === device.id)
-    if (index !== -1)
-      devices.value.splice(index, 1, device)
-  }
-
-  function changePageSize(val: number) {
-    pageSize.value = val
-  }
-  function changeCurrentPage(val: number) {
-    currentPage.value = val
-  }
-
-  return {
-    devices,
-    total,
-    setDevices,
-    addDevice,
-    updateDevice,
-    pageSize,
-    currentPage,
-    category,
-    search,
-    changePageSize,
-    changeCurrentPage,
-  }
+        this.devices = data.data
+        this.total = data.meta.total
+      }
+      catch (error) {
+        return Promise.reject(error)
+      }
+    },
+    addDevice(device: IDeviceResponse) {
+      this.devices.unshift(device)
+      this.total++
+    },
+    updateDevice(device: IDeviceResponse) {
+      const index = this.devices.findIndex(d => d.id === device.id)
+      if (index !== -1)
+        this.devices.splice(index, 1, device)
+    },
+    changePageSize(val: number) {
+      this.pageSize = val
+    },
+    changeCurrentPage(val: number) {
+      this.currentPage = val
+    },
+  },
 })

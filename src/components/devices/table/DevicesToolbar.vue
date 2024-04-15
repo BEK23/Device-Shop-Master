@@ -2,15 +2,14 @@
 import { Search } from 'lucide-vue-next'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
-import { useCategoryStore } from '~/store/category.store'
+import CategorySelect from './CategorySelect.vue'
 import { useDevicesStore } from '~/store/devices.store'
 
 const searchRef = ref('')
 
 const deviceStore = useDevicesStore()
-const categoryStore = useCategoryStore()
 
-const { category, search } = storeToRefs(deviceStore)
+const { search } = storeToRefs(deviceStore)
 
 const handleSearchInputChange = (function () {
   let timer: ReturnType<typeof setTimeout> | null = null
@@ -30,14 +29,9 @@ const handleSearchInputChange = (function () {
   <el-card shadow="never">
     <el-row justify="space-between">
       <el-col :span="4">
-        <el-select v-model="category" placeholder="Category" clearable>
-          <el-option
-            v-for="item in categoryStore.categories"
-            :key="item.id"
-            :label="item.label"
-            :value="item.id"
-          />
-        </el-select>
+        <Suspense>
+          <CategorySelect />
+        </Suspense>
       </el-col>
       <el-col :span="10">
         <el-input

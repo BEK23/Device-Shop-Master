@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { useForm } from 'vee-validate'
 import { useMutation } from '@tanstack/vue-query'
-import DeviceFields from '../fields/DeviceFields.vue'
-import { deviceSchema } from '../schema'
+import DeviceFields from '~/components/devices/fields/DeviceFields.vue'
+import { deviceSchema } from '~/types/schema/device.schema'
 import { createDevice } from '~/api/devices.api'
 import { router } from '~/router'
 import { PATH } from '~/constants/path'

@@ -1,26 +1,28 @@
 <script lang="ts" setup>
 import type { CheckboxValueType, ElTable } from 'element-plus'
-import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import { useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { useMutation } from '@tanstack/vue-query'
+import { useRoute, useRouter } from 'vue-router'
+import { computed, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import RowActions from './components/RowActions.vue'
+import RowActions from '~/components/devices/table/RowActions.vue'
 import { useDevicesStore } from '~/store/devices.store'
 import { useCategoryStore } from '~/store/category.store'
 import type { IDeviceResponse } from '~/types/product.interface'
-import { deleteDevice, getDevicesList, updateDevice } from '~/api/devices.api'
+import { deleteDevice, updateDevice } from '~/api/devices.api'
 
 const router = useRouter()
-
-const centerDialogVisible = ref(false)
-const id = ref<number>()
-
+const route = useRoute()
 const store = useDevicesStore()
 const categoryStore = useCategoryStore()
 
-const { total, devices, ...meta } = storeToRefs(store)
+const { getDevicesList } = store
 
-const queryClient = useQueryClient()
+const { total, devices, ...meta } = storeToRefs(store)
+const centerDialogVisible = ref(false)
+const id = ref<number>()
+
+const sort = computed(() => route.query.sort as string)
+const order = computed(() => route.query.order as string)
 
 const updateMutation = useMutation({
   mutationFn: updateDevice,
@@ -42,11 +44,10 @@ async function handleRemove() {
     await deleteDevice(id.value)
 
     centerDialogVisible.value = false
-
-    await queryClient.prefetchQuery({ queryKey: ['devices', meta], queryFn: () => getDevicesList(meta) })
+    await getDevicesList(sort.value, order.value)
   }
   catch (error) {
-    console.error(error)
+    return Promise.reject(error)
   }
 }
 
@@ -54,6 +55,15 @@ function openDialog(_id: number) {
   centerDialogVisible.value = true
   id.value = _id
 }
+
+watch(
+  () => [sort, order, meta],
+  () => getDevicesList(sort.value, order.value),
+  {
+    immediate: true,
+    deep: true,
+  },
+)
 </script>
 
 <template>
@@ -73,7 +83,7 @@ function openDialog(_id: number) {
 
       <el-table-column prop="category" label="Category" width="250" sortable="custom">
         <template #default="{ row }">
-          <span>{{ categoryStore.getCategoryLabelById(row.category) }}</span>
+          <span>{{ categoryStore.getCategoryLabelByID(row.category) }}</span>
         </template>
       </el-table-column>
 

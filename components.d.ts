@@ -7,7 +7,12 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Breadcrumbs: typeof import('./src/components/Breadcrumbs.vue')['default']
+    Breadcrumbs: typeof import('./src/components/common/Breadcrumbs.vue')['default']
+    CategorySelect: typeof import('./src/components/devices/table/CategorySelect.vue')['default']
+    DeviceFields: typeof import('./src/components/devices/fields/DeviceFields.vue')['default']
+    DevicesLayout: typeof import('./src/components/layouts/DevicesLayout.vue')['default']
+    DevicesTable: typeof import('./src/components/devices/table/DevicesTable.vue')['default']
+    DevicesToolbar: typeof import('./src/components/devices/table/DevicesToolbar.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
@@ -38,5 +43,6 @@ declare module 'vue' {
     ElUpload: typeof import('element-plus/es')['ElUpload']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    RowActions: typeof import('./src/components/devices/table/RowActions.vue')['default']
   }
 }
