@@ -1,21 +1,28 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { API } from '~/api/api'
 import type { ICategoryResponse } from '~/types/category.interface'
 
-export const useCategoryStore = defineStore('category', () => {
-  const categories = ref<ICategoryResponse[]>([])
+interface ICategoryStore {
+  categories: ICategoryResponse[]
+}
 
-  function getCategoryLabelById(id: number) {
-    return categories.value.find(category => category.id === id)?.label
-  }
+export const useCategoryStore = defineStore('category', {
+  state: (): ICategoryStore => ({
+    categories: [],
+  }),
+  getters: {
+    getCategoryLabelByID: state => (id: number) => state.categories.find(category => category.id === id)?.label,
+  },
+  actions: {
+    async getAllCategories() {
+      try {
+        const { data } = await API.get<ICategoryResponse[]>('/categories')
 
-  function setCategories(data: ICategoryResponse[]) {
-    categories.value = data
-  }
-
-  return {
-    categories,
-    setCategories,
-    getCategoryLabelById,
-  }
+        this.categories = data
+      }
+      catch (error) {
+        return Promise.reject(error)
+      }
+    },
+  },
 })

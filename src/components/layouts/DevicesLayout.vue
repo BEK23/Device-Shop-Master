@@ -11,13 +11,10 @@ import { PATH } from '~/constants/path'
 import Breadcrumbs from '~/components/common/Breadcrumbs.vue'
 import { getDevicesList } from '~/api/devices.api'
 import { useDevicesStore } from '~/store/devices.store'
-import { useCategoryStore } from '~/store/category.store'
-import { getAllCategories } from '~/api/category.api'
 
 const route = useRoute()
 
 const deviceStore = useDevicesStore()
-const categoryStore = useCategoryStore()
 
 const { devices, total, ...meta } = storeToRefs(deviceStore)
 const { setDevices, changePageSize, changeCurrentPage } = deviceStore
@@ -30,15 +27,6 @@ useQuery({
   queryFn: () => getDevicesList({ ...meta, sort, order }),
   select: (response) => {
     setDevices(response.data)
-  },
-  refetchOnWindowFocus: false,
-})
-
-useQuery({
-  queryKey: ['categories'],
-  queryFn: () => getAllCategories(),
-  select: (response) => {
-    categoryStore.setCategories(response.data)
   },
   refetchOnWindowFocus: false,
 })

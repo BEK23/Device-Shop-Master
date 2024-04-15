@@ -73,7 +73,7 @@ function openDialog(_id: number) {
 
       <el-table-column prop="category" label="Category" width="250" sortable="custom">
         <template #default="{ row }">
-          <span>{{ categoryStore.getCategoryLabelById(row.category) }}</span>
+          <span>{{ categoryStore.getCategoryLabelByID(row.category) }}</span>
         </template>
       </el-table-column>
 
