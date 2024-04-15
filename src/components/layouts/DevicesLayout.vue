@@ -44,6 +44,14 @@ useQuery({
 })
 
 const drawer = computed(() => route.name === 'devices.create' || route.name === 'devices.edit')
+
+const drawerTitle = computed(() => {
+  if (route.name === 'devices.create')
+    return 'Create Device'
+  if (route.name === 'devices.edit')
+    return 'Edit Device'
+  return ''
+})
 </script>
 
 <template>
@@ -71,7 +79,19 @@ const drawer = computed(() => route.name === 'devices.create' || route.name === 
     @current-change="changeCurrentPage"
   />
 
-  <el-drawer v-model="drawer" :with-header="false" size="40%" @close="$router.replace(PATH.devices.index)">
+  <el-drawer v-model="drawer" size="40%" @close="$router.replace(PATH.devices.index)">
+    <template #header>
+      <div class="header__title">
+        {{ drawerTitle }}
+      </div>
+    </template>
     <router-view />
   </el-drawer>
 </template>
+
+<style scoped>
+.header__title {
+  font-size: 20px;
+  font-weight: 500;
+}
+</style>

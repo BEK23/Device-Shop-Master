@@ -128,4 +128,8 @@ const toggleDark = useToggle(isDark)
 .el-upload-dragger {
   --el-upload-dragger-padding-horizontal: 20px;
 }
+
+.el-drawer__header {
+  margin-bottom: 0!important;
+}
 </style>
