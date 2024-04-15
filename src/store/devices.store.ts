@@ -7,7 +7,7 @@ interface IDevicesStore {
   total: number
   pageSize: number
   currentPage: number
-  category: number | null
+  category?: number
   search: string
 }
 
@@ -17,7 +17,7 @@ export const useDevicesStore = defineStore('devices', {
     total: 0,
     pageSize: 10,
     currentPage: 1,
-    category: null,
+    category: undefined,
     search: '',
   }),
   actions: {
