@@ -10,6 +10,7 @@ declare module 'vue' {
     Breadcrumbs: typeof import('./src/components/common/Breadcrumbs.vue')['default']
     DeviceFields: typeof import('./src/components/devices/fields/DeviceFields.vue')['default']
     DevicesLayout: typeof import('./src/components/layouts/DevicesLayout.vue')['default']
+    DevicesTable: typeof import('./src/components/devices/table/DevicesTable.vue')['default']
     DevicesToolbar: typeof import('./src/components/devices/table/DevicesToolbar.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
