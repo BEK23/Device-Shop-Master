@@ -132,4 +132,8 @@ const toggleDark = useToggle(isDark)
 .el-drawer__header {
   margin-bottom: 0!important;
 }
+
+.el-drawer__body {
+  --el-drawer-padding-primary: 0
+}
 </style>

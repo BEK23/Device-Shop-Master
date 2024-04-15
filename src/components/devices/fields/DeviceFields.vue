@@ -46,29 +46,25 @@ function handleRemoveFile() {
     <el-input v-model="model" />
   </el-form-item>
 
-  <el-row :gutter="12">
-    <el-col :span="12">
-      <el-form-item label="Category" v-bind="categoryProps">
-        <el-select v-model="category">
-          <el-option
-            v-for="item in categoryStore.categories"
-            :key="item.id"
-            :label="item.label"
-            :value="item.id"
-          />
-        </el-select>
-      </el-form-item>
-    </el-col>
+  <div class="row">
+    <el-form-item label="Category" v-bind="categoryProps" style="width: 100%;">
+      <el-select v-model="category" style="width: 100%;">
+        <el-option
+          v-for="item in categoryStore.categories"
+          :key="item.id"
+          :label="item.label"
+          :value="item.id"
+        />
+      </el-select>
+    </el-form-item>
 
-    <el-col :span="12">
-      <el-form-item label="Release Date" v-bind="releaseDateProps">
-        <el-date-picker v-model="releaseDate" type="year" style="width: 100%;" :disabled-date="disabledDate" />
-      </el-form-item>
-    </el-col>
-  </el-row>
+    <el-form-item label="Release Date" v-bind="releaseDateProps" style="width: 100%;">
+      <el-date-picker v-model="releaseDate" type="year" style="width: 100%;" :disabled-date="disabledDate" />
+    </el-form-item>
+  </div>
 
   <el-form-item label="Recommended Price" v-bind="recommendedPriceProps">
-    <el-input-number v-model="recommendedPrice" :precision="2" :step="0.1" :min="0" />
+    <el-input-number v-model="recommendedPrice" :precision="2" :step="0.01" :min="0" />
   </el-form-item>
 
   <el-form-item label="Description" v-bind="descriptionProps">
@@ -119,5 +115,10 @@ function handleRemoveFile() {
   position: absolute;
   right: 8px;
   top: 2px;
+}
+
+.row {
+  display: flex;
+  gap: 12px;
 }
 </style>

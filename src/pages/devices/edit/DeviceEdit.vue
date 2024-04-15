@@ -69,6 +69,7 @@ const onSubmit = handleSubmit(({ releaseDate, category, photo, ...rest }) => upd
 
 <style scoped>
 .el-scrollbar {
-  padding: 0!important;
+  padding: 20px;
+  box-sizing: border-box
 }
 </style>
